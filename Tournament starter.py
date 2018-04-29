@@ -38,7 +38,10 @@ async def on_message(message):
 				r = requests.post(url,data=json.dumps(payload))
 				print(r.text)
 				print(r.status_code)
-				await client.send_message(message.channel,"Created a tournament match named {}".format(" ".join(splitmsg[1:])))
+				if r.status_code == 401:
+					await client.send_message(message.channel, "Unauthorized!")
+				else:
+					await client.send_message(message.channel,"Created a tournament match named {}".format(" ".join(splitmsg[1:])))
 			except ValueError:
 				pass
 
