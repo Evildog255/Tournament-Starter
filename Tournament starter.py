@@ -31,11 +31,14 @@ async def on_message(message):
 		if len(splitmsg) < 2:
 			await client.send_message(message.channel, "Insert a tournament name!")
 		else:
-			payload = {'name':'{}'.format(splitmsg[1]), 'providerId' : '0'}
-			url = "https://euw1.api.riotgames.com/lol/tournament/v3/tournaments?api_key={}".format(riotkey)
-			r = request.post(url,data=json.dumps(payload))
-			print(r.text)
-			print(r.status_code)
-			await client.send_message(message.channel,"Created a tournament match named {}".format(splitmsg[1]))
+			try:
+				payload = {'name':'{}'.format(" ".join(splitmsg[1:])), 'providerId' : '0'}
+				url = "https://euw1.api.riotgames.com/lol/tournament/v3/tournaments?api_key={}".format(riotkey)
+				r = request.post(url,data=json.dumps(payload))
+				print(r.text)
+				print(r.status_code)
+				await client.send_message(message.channel,"Created a tournament match named {}".format(" ".join(splitmsg[1:])))
+			except ValueError:
+				pass
 
 client.run('')
