@@ -36,6 +36,6 @@ async def on_message(message):
 			r = request.post(url,data=json.dumps(payload))
 			print(r.text)
 			print(r.status_code)
-			await client.send_message(message.channel,"tournament work in progress!")
+			await client.send_message(message.channel,"Created a tournament match named {}".format(splitmsg[1]))
 
 client.run('')
