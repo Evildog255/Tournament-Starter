@@ -6,6 +6,7 @@ from datetime import date
 from datetime import datetime
 from datetime import timedelta
 import requests
+import json
 
 client = discord.Client()
 riotkey = ""
